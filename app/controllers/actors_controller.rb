@@ -21,19 +21,19 @@ class ActorsController < ApplicationController
 		# call constructor of Actor model class giving it the
 		# first name and last name parameters input in the actors
 		# new.html.erb
-		# constructo creates Actor model object which is stored
+		# constructor creates Actor model object which is stored
 		# in variable
 		actor = Actor.new(actor_params)
-		# call save method on Acotr object
+		# call save method on Actor object
 		# save metod inserts the data in the Actor model object
-		# into the acotr table
+		# into the actor table
 		if actor.save
-			# if the save method succeds, request the actors URL
+			# if the save method succeeds, request the actors URL
 			# which will rendor the actors index.html.erb in the browser
 			redirect_to "/actors"
 		else
-			# get full messaes associated with errors
-			# store them in a Rails flahs object named errors so that
+			# get full messages associated with errors
+			# store them in a Rails flash object named errors so that
 			# the full message may be displayed in the actors new.html.erb
 			flash[:errors] = actor.errors.full_messages
 			# if the save method succeds, request the actors/new URL
