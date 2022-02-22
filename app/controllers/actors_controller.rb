@@ -75,7 +75,7 @@ class ActorsController < ApplicationController
 		# request
 		# find method selects all of the data in the actor table where
 		# the id is equal to the id sent in the request
-		# the slected data will be returned as an object
+		# the selected data will be returned as an object
 		# the object will be stored in a variable
 		actor = Actor.find(params[:id])
 		# call update method on Actor object giving it the first name and
@@ -97,7 +97,7 @@ class ActorsController < ApplicationController
 	end
 end
 	
-	# delete method get cslled when the actors/:id/delete URL is requested
+	# delete method get called when the actors/:id/delete URL is requested
 	# delete method is mapped to the actors delete.html.erb
 	def delete
 

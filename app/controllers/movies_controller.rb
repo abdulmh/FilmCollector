@@ -28,7 +28,7 @@ class MoviesController < ApplicationController
 		# save metod inserts the data in the Movie model object
 		# into the movie table
 		if movie.save
-			# if the save method succeeds, request the actors URL
+			# if the save method succeeds, request the movies URL
 			# which will rendor the movies index.html.erb in the browser
 			redirect_to "/movies"
 		else
@@ -43,16 +43,76 @@ class MoviesController < ApplicationController
 	end
 
 	# show method gets called when the movies/:id URL is requested
-	#show method is mapped to the actors show.html.erb
+	#show method is mapped to the movies show.html.erb
 	def show
 		# call find method on Movie model class giving it the id sent
 		# in the request
 		# find method selects all of the data in the movie table where
 		# the id is equal to the id sent in the request 
-		# selected data will be returned in an array of actor objects
-		# store the array of actor objects in an instance variable 
+		# selected data will be returned in an array of movie objects
+		# store the array of movie objects in an instance variable 
 		# instance variable is available to movies show.html.erb
-		@movies = Actor.find(params[:id]).movies
+		@actors = Movie.find(params[:id]).actors
+	end
+
+	def edit
+		# call find method on Movie model class giving it the id sent
+		# in the request
+		# the find method selects all of the data in the movie table where
+		# the id is equal to the id sent in the request
+		# the selected data will be returned as an object
+		# the object will be stored in an instance variable 
+		# that will be available to the edit.html.erb 
+		@movie = Movie.find(params[:id])
+	end
+
+	def update
+		# call find method on Movie model clss givng it the id sent in the 
+		# request
+		# find method selects all of the data in the movie table where
+		# the id is equal to the id sent in the request
+		# the selected data will be returned as an object
+		# the object will be stored in a variable
+		movie = Movie.find(params[:id])
+		# call update method on Movie object giving it the first name and
+		# last name parameters input in the movies edit.html.erb
+		# update method updates the data in the movie table use the parameters
+		if movie.update(movie_params)
+			# if the update method succeeds, request the movies URL which
+			# will render the movies index.html.erb in the browser
+			redirect_to "/movies"
+		else
+			# if the update fails, get full messages associated 
+			# with errors
+			# store them in a Rails flash object named errors so that
+			# the full message may be displayed in the requested URL
+			flash[:errors] = movie.errors.full_messages
+			# request the movies/:id/edit URL which will render movies
+			# edit.html.erb 
+			redirect_to "/movie/#{movie.id}/edit"
+		end
+	end
+
+	# delete method get called when the movies/:id/delete URL is requested
+	# delete method is mapped to the movies delete.html.erb
+	def delete
+
+		# call find method on Movie model class giving it the id sent
+		# in the request
+		# the find method selects all of the data in the movie table where
+		# the id is equal to the id sent in the request
+		# the selected data will be returned as an object
+		# the object will be stored in an instance variable 
+		# that will be available to the delete.html.erb 
+		@movie = Movie.find(params[:id])
+	end
+
+	# destroy metod gets called when the Delete button is pushed on the 
+	# movies delete.html.erb
+	def destroy
+		movie = Movie.find(params[:id])
+		movie.destroy
+		redirect_to "/movies"
 	end
 
 	private
