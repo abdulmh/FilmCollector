@@ -6,7 +6,7 @@ class ActorsController < ApplicationController
 		# all method selects all of the data in the actor table
 		# and returns the data as an array of objects.
 		# store the array of objects in an instance variable.
-		# instance variable is avialable to actors index.html.erb.
+		# instance variable is available to actors index.html.erb.
 		@actors = Actor.all
 	end
 	
