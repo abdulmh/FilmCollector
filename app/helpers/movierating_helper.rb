@@ -1,0 +1,2 @@
+module MovieratingHelper
+end
